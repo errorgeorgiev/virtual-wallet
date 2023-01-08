@@ -1,0 +1,10 @@
+<!-- templates/account/login.html -->
+
+<h3>Влезте в профила си:</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Влизане</button>
+</form>
+
+
