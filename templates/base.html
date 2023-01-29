@@ -1,1 +1,58 @@
 <!-- templates/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="px-2 navbar-brand">Crypto Virtual Wallet</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Dashboard</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/trade">Trade</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/portfolio">Portfolio</a>
+            </li>
+            {% endif %}
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link">Currently logged in as : {{ user.email }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-danger mx-2 my-2 my-sm-0" href="{% url 'account_logout' %}">Log Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="btn btn-outline-success mx-2 my-2 my-sm-0" href="{% url 'account_login' %}">Log In</a> 
+            </li class="nav-item">
+            <li class="nav-item">
+                <a class="btn btn-outline-success mx-2 my-2 my-sm-0" href="{% url 'account_signup' %}">Sign up</a> 
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+<footer class="footer text-center mt-auto py-1 bg-light fixed-bottom">
+    <div class="container">
+        <span class="text-muted">All rights reserved</span>
+    </div>
+</footer>
+</html>
