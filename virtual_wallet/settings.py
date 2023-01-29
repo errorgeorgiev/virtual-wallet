@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     # Local
     'wallets', # connect the wallets sub-app
-    'pages',
+    'pages', # connect the pages sub-app
 
     # 3rd party
     'allauth',

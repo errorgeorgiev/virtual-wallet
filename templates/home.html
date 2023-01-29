@@ -50,10 +50,14 @@
                             <td>{{ item.market_cap_rank }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.symbol }}</td>
-                            <td><img class="col-md-4 col-sm-4 img-responsive" src="{{ item.image }}"></td>
+                            <td><img width="70px" height="70px" src="{{ item.image }}"></td>
                             <td>{{ item.current_price }}</td>
                             <td>{{ item.market_cap }}</td>
-                            <td>{{ item.price_change_percentage_24h }}%</td>
+                            {% if item.price_change_percentage_24h > 0%}
+                            <td class="text-success">{{ item.price_change_percentage_24h }}%</td>
+                            {% else %}
+                            <td class="text-danger">{{ item.price_change_percentage_24h }}%</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>

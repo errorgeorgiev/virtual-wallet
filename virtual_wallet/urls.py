@@ -20,4 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')), # new
     path('', include('pages.urls')), # new
+    path('portfolio/', include('pages.urls')),
+    path('trade/', include('pages.urls')),
+    path('success/', include('pages.urls')),
 ]

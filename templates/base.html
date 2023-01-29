@@ -31,14 +31,14 @@
                 <a class="nav-link">Currently logged in as : {{ user.email }}</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-danger mx-2 my-2 my-sm-0" href="{% url 'account_logout' %}">Log Out</a>
+                <a class="btn btn-danger mx-2 my-2 my-sm-0" href="{% url 'account_logout' %}">Log Out</a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="btn btn-outline-success mx-2 my-2 my-sm-0" href="{% url 'account_login' %}">Log In</a> 
+                <a class="btn btn-success mx-2 my-2 my-sm-0" href="{% url 'account_login' %}">Log In</a> 
             </li class="nav-item">
             <li class="nav-item">
-                <a class="btn btn-outline-success mx-2 my-2 my-sm-0" href="{% url 'account_signup' %}">Sign up</a> 
+                <a class="btn btn-warning mx-2 my-2 my-sm-0" href="{% url 'account_signup' %}">Sign up</a> 
             </li>
             {% endif %}
           </ul>
@@ -52,7 +52,7 @@
 </body>
 <footer class="footer text-center mt-auto py-1 bg-light fixed-bottom">
     <div class="container">
-        <span class="text-muted">All rights reserved</span>
+        <span class="text-muted">All rights reserved&#169;</span>
     </div>
 </footer>
 </html>
