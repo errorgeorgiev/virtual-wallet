@@ -1,6 +1,58 @@
 {% extends 'base.html' %}
 
 {% block title %}Portfolio{% endblock %}
+
 {% block content %}
-<p>portfolio</p>
+
+<div class="container my-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">User Information</h5>
+            <p class="card-text">Username: John Doe</p>
+            <p class="card-text">Email: john.doe@example.com</p>
+            <p class="card-text">Total deposited money(USD): {{data.deposited_amount}}</p>
+            <p class="card-text">Total balance(USD): {{data.current_amount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Coin Distribution</h5>
+            <div id="pie-graph"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Pie Graph JavaScript -->
+  <script>
+    // Data
+    var data = [
+      {
+        values: [10, 20, 300, 1000, 5000],
+        labels: ["Bitcoin", "Ethereum", "Cardano", "Doge", "Ripple"],
+        type: "pie"
+      }
+    ];
+
+    // Layout
+    var layout = {
+      title: "Coin Distribution",
+      height: 400,
+      width: 500
+    };
+
+    // Plot the Pie Graph
+    Plotly.newPlot("pie-graph", data, layout);
+  </script>
+
 {% endblock %}

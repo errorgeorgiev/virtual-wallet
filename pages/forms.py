@@ -10,3 +10,8 @@ class CryptoForm(forms.Form):
 
     crypto = forms.ChoiceField(choices=CRYPTO_CHOICES)
     quantity = forms.DecimalField()
+
+
+class DepositForm(forms.Form):
+    value = forms.DecimalField()
+    currency = 'USD'

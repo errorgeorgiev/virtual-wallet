@@ -18,10 +18,16 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="/trade">Trade</a>
+                <a class="nav-link" href="/deposit">Deposit</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/trade">Buy/Sell</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/portfolio">Portfolio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/transactions">Transactions</a>
             </li>
             {% endif %}
           </ul>
