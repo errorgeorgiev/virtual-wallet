@@ -1,9 +1,11 @@
 import datetime
+import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .forms import CryptoForm, DepositForm
 from wallets.models import CustomUser, Transaction, Coin
+
 
 
 # Create your views here.
@@ -72,6 +74,7 @@ def buy_view(request):
             # check if we have the needed funds
             if needed_dollars <= user.current_account_value:
                 user.current_account_value -= needed_dollars
+                user.cryptocurrencies_value += needed_dollars
                 user.save()
                 # add coin to portfolio or update coin values
                 if user.coins.filter(name=crypto).exists(): # if coin exists
@@ -109,6 +112,7 @@ def sell_view(request):
                 if found_coin_in_database.quantity >= quantity:
                     # we sell the coin
                     user.current_account_value += quantity * coin_current_price
+                    user.cryptocurrencies_value -= quantity * coin_current_price
                     user.save()
                     found_coin_in_database.quantity -= quantity
                     found_coin_in_database.current_price = coin_current_price
@@ -144,28 +148,42 @@ def deposit_view(request):
 
 
 def portfolio_view(request):
-    username = 'admin'
-    email = 'admin@admin.com'
-    entry_values = [1, 2, 300, 1000, 10000]
-    entry_coins = [ "bitcoin", "ethereum", "cardano", "doge", "xrp" ]
-    # prices = pass // maybe should be updated in the fist page
-    deposited_amount = 100000
-    current_amount = 120000
-    values = []
-    coins = []
+    user = request.user
+    username = user.username
+    email = user.email
+    total_deposited_usd = user.total_deposits
 
-    for i in range (5):
-        values.append(entry_coins[i])
-        coins.append(entry_values[i])
-    
+    coins = user.coins.all()
+    current_total_balance_wallet = 0
+    prices = []
+    names= []
+    for coin in coins:
+        # test
+        
+        # test
+        name = coin.name
+        quantity = coin.quantity
+        api_data = requests.get(f'https://api.coingecko.com/api/v3/coins/{name}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false').json()
+        price = api_data['market_data']['current_price']['usd']
+        prices.append(price*quantity)
+        names.append(name)
+        current_total_balance_wallet += quantity * price
+    current_total_balance_wallet += user.current_account_value
+    prices.append(user.current_account_value)
+    names.append('usd')
+    percentage = (current_total_balance_wallet - total_deposited_usd) / (total_deposited_usd * 100)
+    # data_names = {'names' : names}
+    # json_data = json.dumps(data_names)
+
     data = {
         'username' : username,
         'email' : email,
-        'values' : values,
+        'total_deposited_usd' : total_deposited_usd,
         'coins' : coins,
-        # 'prices' : prices
-        'deposited_amount' : deposited_amount,
-        'current_amount' : current_amount,
+        'current_total_balance_wallet' : current_total_balance_wallet,
+        'percentage' : percentage,
+        'prices' : prices,
+        'names' : names,
     }
     
     return render(request, 'portfolio.html', {'data': data})

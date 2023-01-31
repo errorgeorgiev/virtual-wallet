@@ -22,6 +22,7 @@ class Transaction(models.Model):
 class CustomUser(AbstractUser):
     total_deposits = models.IntegerField(default = 0) # new
     current_account_value = models.FloatField(default=0.0) # new
+    cryptocurrencies_value = models.FloatField(default=0.0) # new
     coins = models.ManyToManyField(Coin)
     transactions = models.ManyToManyField(Transaction)
 

@@ -11,10 +11,16 @@
             <div class="hstack">
                 <div class="card-body w-50">
                     <h5 class="card-title">User Information</h5>
-                    <p class="card-text">Username: {{user.username}}</p>
-                    <p class="card-text">Email: {{user.email}}</p>
-                    <p class="card-text">Total deposited money(USD): {{user.total_deposits}}</p>
-                    <p class="card-text">Total balance(USD): {{user.current_account_value}}</p>
+                    <p class="card-text">Username: {{data.username}}</p>
+                    <p class="card-text">Email: {{data.email}}</p>
+                    <p class="card-text">Total deposited money(USD): {{data.total_deposited_usd}}</p>
+                    <p class="card-text">Current balance in USD: {{user.current_account_value}}</p>
+                    {% if data.current_total_balance_wallet >= 0 %}
+                        <p class="card-text text-success">You have outperformed the market with: {{data.percentage}}%</p>
+                    {% else %}
+                        <p class="card-text text-danger">The market has outperformed you with: {{ data.percentage }}%</p>
+                    {% endif %}
+                    <p class="card-text">Total balance of wallet: {{data.current_total_balance_wallet}}</p>
                   </div>
                   <div class="card-body text-center w-50">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-bounding-box w-70" viewBox="0 0 16 16">
@@ -30,7 +36,7 @@
       <div class="col-md-6 mx-auto">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Coin Distribution</h5>
+            <h5 class="card-title">Coins Distribution:</h5>
             <div id="pie-graph"></div>
           </div>
         </div>
@@ -38,16 +44,45 @@
     </div>
   </div>
 
+
+  <!-- data = {
+    'username' : username,
+    'email' : email,
+    'total_deposited_usd' : total_deposited_usd,
+    'coins' : coins,
+    'current_total_balance_wallet' : current_total_balance_wallet,
+    'percentage' : percentage,
+    'prices' : price,
+    'names' : names
+} -->
+
+
+
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <!-- Pie Graph JavaScript -->
   <script>
     // Data
-    var data = [
+    var values_data = [
+        {% for item in data.prices %}
+            "{{ item }}",
+        {% endfor %}
+    ];
+
+    var labels_data = [
+        {% for item in data.names %}
+            "{{ item }}",
+        {% endfor %}
+    ];
+
+
+    // var values_data = JSON.parse( {{ data.prices }} );
+    // var labels_data = JSON.parse( {{ data.names }} );  
+    var dataset = [
       {
-        values: [10, 20, 300, 1000, 5000],
-        labels: ["Bitcoin", "Ethereum", "Cardano", "Doge", "Ripple"],
+        values: values_data,
+        labels: labels_data,
         type: "pie"
       }
     ];
@@ -60,7 +95,7 @@
     };
 
     // Plot the Pie Graph
-    Plotly.newPlot("pie-graph", data, layout);
+    Plotly.newPlot("pie-graph", dataset, layout);
   </script>
 
 {% endblock %}
