@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'virtual_wallet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'crypto-wallet-db',
+        'NAME': 'virtual-wallet-db-test-third',
         'USER': 'postgres',
         'PASSWORD': 'database_password',
         'HOST': 'localhost',

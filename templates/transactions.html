@@ -1,0 +1,34 @@
+<!-- templates/transactions.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% load static %}
+<!-- starting of the transactions page-->
+{% block content %} 
+<div class="px-5 py-2">
+    <table class="container-fluid my-table table-bordered text-center table-responsive table-hover">
+        <thead class="thead-dark bg-light bg-gradient">
+        <tr>
+            <th scope="col">Type of transaction</th>
+            <th scope="col">Date</th>
+            <th scope="col">Coin</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.date }}</td>
+                    <td>{{ transaction.coin_name }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.price_when_bought }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

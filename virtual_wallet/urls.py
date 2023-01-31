@@ -23,7 +23,10 @@ urlpatterns = [
     path('portfolio/', include('pages.urls')),
     path('buy/', include('pages.urls')),
     path('sell/', include('pages.urls')),
+    path('transactions/', include('pages.urls')),
     path('success_buy/', include('pages.urls')),
+    path('error_buy/', include('pages.urls')),
+    path('error_sell/', include('pages.urls')),
     path('deposit/', include('pages.urls')),
     path('success_deposit', include('pages.urls')),
 ]
