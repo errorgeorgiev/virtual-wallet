@@ -15,6 +15,6 @@ urlpatterns = [
     path('error_buy/<str:crypto>', views.error_buy_view, name='error_buy_view'),
     path('error_sell/<str:crypto>', views.error_sell_view, name='error_sell_view'),
     path('success_sell/<str:crypto>', views.success_sell_view, name='success_sell_view'), 
-    path('success/<int:value>', views.success_deposit_view, name='success_deposit_view'), 
+    path('success_buy/<int:value>', views.success_deposit_view, name='success_deposit_view'), 
     path('deposit/', views.deposit_view, name='deposit_view'),
 ]
