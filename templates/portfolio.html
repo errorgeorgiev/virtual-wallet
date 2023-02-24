@@ -13,12 +13,12 @@
                     <h5 class="card-title">User Information</h5>
                     <p class="card-text">Username: {{data.username}}</p>
                     <p class="card-text">Email: {{data.email}}</p>
-                    <p class="card-text">Total deposited money(USD): {{data.total_deposited_usd}}</p>
-                    <p class="card-text">Current balance in USD: {{user.current_account_value}}</p>
-                    {% if data.current_total_balance_wallet >= 0 %}
-                        <p class="card-text text-success">You have outperformed the market with: {{data.percentage}}%</p>
+                    <p class="card-text">Total deposited money(USD): {{ data.total_deposited_usd }}</p>
+                    <p class="card-text">Current balance in USD: {{ data.current_dollars }}</p>
+                    {% if data.percentage >= 0 %}
+                        <p class="card-text text-success">You have outperformed the market by: {{ data.percentage }}%</p>
                     {% else %}
-                        <p class="card-text text-danger">The market has outperformed you with: {{ data.percentage }}%</p>
+                        <p class="card-text text-danger">The market has outperformed you by: {{ data.percentage }}%</p>
                     {% endif %}
                     <p class="card-text">Total balance of wallet: {{data.current_total_balance_wallet}}</p>
                   </div>

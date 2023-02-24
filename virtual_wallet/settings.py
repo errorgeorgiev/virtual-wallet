@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'virtual_wallet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'virtual-wallet-db-test-fourth',
+        'NAME': 'virtual-wallet-db-test-fifth',
         'USER': 'postgres',
         'PASSWORD': 'database_password',
         'HOST': 'localhost',
@@ -161,5 +161,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
 LOGIN_REDIRECT_URL = 'home'
-#LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
