@@ -1,7 +1,6 @@
 asgiref==3.6.0
 beautifulsoup4==4.11.1
-bitcoin==1.1.42
-certifi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_5d968ni_yn/croot/certifi_1671487774636/work/certifi
+bitcoin==1.1.42 
 cffi==1.15.1
 charset-normalizer==2.1.1
 cryptography==39.0.0
